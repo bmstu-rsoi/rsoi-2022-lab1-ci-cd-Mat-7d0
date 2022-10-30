@@ -14,5 +14,14 @@ services:
     ports:
       - "5432:5432"
 
+  genie:
+    image: docker.io/library/genie
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    container_name: genie
+    
+
 volumes:
   db-data:
