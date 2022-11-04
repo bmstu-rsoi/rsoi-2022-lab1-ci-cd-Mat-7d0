@@ -1,0 +1,1 @@
+"B:\Apps\Development\Language\Julia-1.7.2\pkg\juliaup\julia-1.8.1+0.x64\bin\julia" --color=yes --depwarn=no --project=@. -q -i -- "%~dp0..\bootstrap.jl" -s=true %*
