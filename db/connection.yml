@@ -2,7 +2,7 @@ env: ENV["GENIE_ENV"]
 
 dev:
   adapter:  PostgreSQL
-  host:     localhost
+  host:     ec2-54-228-32-29.eu-west-1.compute.amazonaws.com
   port:     5432
   database: d9j5dfmi3h9apd
   username: fhgwnmywyjnqkx
