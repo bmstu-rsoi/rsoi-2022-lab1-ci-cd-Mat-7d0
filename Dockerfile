@@ -12,9 +12,9 @@ WORKDIR /home/genie/app
 # configure permissions
 RUN chown -R genie:genie /home/
 
-RUN sudo chmod +x bin/repl
-RUN sudo chmod +x bin/server
-RUN sudo chmod +x bin/runtask
+#RUN sudo chmod +x bin/repl
+#RUN sudo chmod +x bin/server
+#RUN sudo chmod +x bin/runtask
 
 # switch user
 USER genie
