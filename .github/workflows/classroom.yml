@@ -15,10 +15,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build project
-        uses: julia-actions/setup-julia@v1.8.1
-
-
       - name: Deploy project
         uses: akhileshns/heroku-deploy@v3.4.6
         with:
