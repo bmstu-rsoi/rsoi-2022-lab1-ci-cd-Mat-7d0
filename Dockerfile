@@ -2,7 +2,7 @@
 FROM --platform=linux/amd64 julia:latest
 
 # create dedicated user
-RUN useradd --create-home --shell /bin/bash genie
+#RUN useradd --create-home --shell /bin/bash genie
 
 # set up the app
 RUN mkdir /home/genie/app
@@ -17,7 +17,7 @@ RUN chown -R genie:genie /home/
 #RUN sudo chmod +x bin/runtask
 
 # switch user
-USER genie
+#USER genie
 
 # instantiate Julia packages
 RUN julia -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate(); Pkg.precompile(); "
