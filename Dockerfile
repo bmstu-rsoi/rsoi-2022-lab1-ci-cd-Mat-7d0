@@ -2,7 +2,7 @@
 FROM --platform=linux/amd64 julia:latest
 
 # create dedicated user
-#RUN useradd --create-home --shell /bin/bash genie
+RUN useradd --create-home --shell /bin/bash genie
 
 # set up the app
 RUN mkdir /home/genie/app
@@ -12,9 +12,9 @@ WORKDIR /home/genie/app
 # configure permissions
 RUN chown -R genie:genie /home/
 
-#RUN sudo chmod +x bin/repl
-#RUN sudo chmod +x bin/server
-#RUN sudo chmod +x bin/runtask
+#RUN chmod +x bin/repl
+#RUN chmod +x bin/server
+#RUN chmod +x bin/runtask
 
 # switch user
 #USER genie
