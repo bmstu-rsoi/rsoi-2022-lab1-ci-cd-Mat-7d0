@@ -1,5 +1,5 @@
 # pull latest julia image
-FROM --platform=linux/amd64 julia:latest
+FROM --platform=linux/amd64 julia:1.8.1
 
 # create dedicated user
 RUN useradd --create-home --shell /bin/bash genie
@@ -12,6 +12,9 @@ WORKDIR /home/genie/app
 # configure permissions
 RUN chown -R genie:genie /home/
 
+RUN ["chmod", "+x", "bin/repl"]
+RUN ["chmod", "+x", "bin/server"]
+RUN ["chmod", "+x", "bin/runtask"]
 #RUN chmod +x bin/repl
 #RUN chmod +x bin/server
 #RUN chmod +x bin/runtask
