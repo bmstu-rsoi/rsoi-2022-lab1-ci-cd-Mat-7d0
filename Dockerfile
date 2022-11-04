@@ -12,9 +12,6 @@ WORKDIR /home/genie/app
 # configure permissions
 RUN chown -R genie:genie /home/
 
-#RUN ["chmod", "+x", "bin/repl"]
-#RUN ["chmod", "+x", "bin/server"]
-#RUN ["chmod", "+x", "bin/runtask"]
 RUN chmod +x bin/repl
 RUN chmod +x bin/server
 RUN chmod +x bin/runtask
@@ -38,7 +35,7 @@ ENV WSPORT "8000"
 ENV EARLYBIND "true"
 
 # run app
-ENTRYPOINT ["bin/server"]
+CMD ["bin/server"]
 
 # or maybe include a Julia file
 # CMD julia -e 'using Pkg; Pkg.activate("."); include("IrisClustering.jl"); '

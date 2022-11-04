@@ -2,23 +2,7 @@ env: ENV["GENIE_ENV"]
 
 dev:
   adapter:  PostgreSQL
-  host:     ec2-54-228-32-29.eu-west-1.compute.amazonaws.com
-  port:     5432
-  database: d9j5dfmi3h9apd
-  username: fhgwnmywyjnqkx
-  password: da4b8a576ff3a19786b0839168507a2ed25a0c68915a12d4cd63b3fd3e3fc5b0
-
-prod:
-  adapter:  PostgreSQL
-  host:     ec2-54-228-32-29.eu-west-1.compute.amazonaws.com
-  port:     5432
-  database: d9j5dfmi3h9apd
-  username: fhgwnmywyjnqkx
-  password: da4b8a576ff3a19786b0839168507a2ed25a0c68915a12d4cd63b3fd3e3fc5b0
-
-test:
-  adapter:  PostgreSQL
-  host:     ec2-54-228-32-29.eu-west-1.compute.amazonaws.com
+  host:     localhost
   port:     5432
   database: d9j5dfmi3h9apd
   username: fhgwnmywyjnqkx
