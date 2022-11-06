@@ -65,17 +65,17 @@ module PersonsController
       return json(Dict(:message=>"Person not found"), status = 404)
     end
 
-    if "name" in keys(payload)
-      foundPersons[1].name = payload["name"]
+    if "name" in keys(jsonpayloadData)
+      foundPersons[1].name = jsonpayloadData["name"]
     end
-    if "work" in keys(payload)
-      foundPersons[1].work = payload["work"]
+    if "work" in keys(jsonpayloadData)
+      foundPersons[1].work = jsonpayloadData["work"]
     end
-    if "age" in keys(payload)
-      foundPersons[1].age = payload["age"]
+    if "age" in keys(jsonpayloadData)
+      foundPersons[1].age = jsonpayloadData["age"]
     end
-    if "address" in keys(payload)
-      foundPersons[1].address = payload["address"]
+    if "address" in keys(jsonpayloadData)
+      foundPersons[1].address = jsonpayloadData["address"]
     end
 
     foundPersons[1] = save!(foundPersons[1])
