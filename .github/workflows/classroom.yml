@@ -25,6 +25,11 @@ jobs:
 
       # TODO build, test and deploy project
 
+      - name: Sleep for 10s
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 10s
+
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:

@@ -9,7 +9,7 @@ module PersonsController
       Dict(key=>if key != :id getfield(person, key) else getfield(getfield(person, key), :value) end for key ∈ fieldnames(Person))
     end
 
-    json(:persons, :index, foundPersons=foundPersons)
+    json(foundPersons)
   end
 
   function byId() #Done
@@ -18,9 +18,9 @@ module PersonsController
     end
 
     if isempty(foundPersons)
-      json(:persons, :byId, foundPerson=Dict(:message=>"Person not found"), status = 404)
+      json(Dict(:message=>"Person not found"), status = 404)
     else
-      json(:persons, :byId, foundPerson=foundPersons[1])
+      json(foundPersons[1])
     end
   end
 
