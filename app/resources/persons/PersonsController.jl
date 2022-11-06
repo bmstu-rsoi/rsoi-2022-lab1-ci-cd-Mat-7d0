@@ -42,40 +42,50 @@ module PersonsController
   end
 
   function update() #Done
-    payload = jsonpayload()
+    jsonpayloadData = jsonpayload()
 
-    if all(keys(payload) .∈ (["name", "work", "age", "address", "id"],)) &&
-    length(payload) == 5
-    id = payload["id"]
-      foundPersons = map(SearchLight.find(Person, SearchLight.SQLWhereExpression("id = $(id)", 0))) do person
-        Dict(key=>if key != :id getfield(person, key) else getfield(getfield(person, key), :value) end for key ∈ fieldnames(Person)) 
+    additionalProps = Dict()
+    for key in keys(jsonpayloadData)
+      if key != "name" &&
+         key != "work" &&
+         key != "age" &&
+         key != "address"
+
+         additionalProps[key] = jsonpayloadData[key]
       end
-      if isempty(foundPersons)
-        json(Dict(:message=>"Person not found"), status = 404)
-      else
-        person = Person(name=payload["name"], 
-                    work=payload["work"],
-                    age=payload["age"],
-                    address=payload["address"],
-                    id=id)
-        save(person)
-        foundPersons = map(SearchLight.find(Person, SearchLight.SQLWhereExpression("id = $(id)", 0))) do person
-          Dict(key=>if key != :id getfield(person, key) else getfield(getfield(person, key), :value) end for key ∈ fieldnames(Person)) 
-        end
-        json(foundPersons[1])
-      end
+    end
+    if !isempty(additionalProps)
+      errorMsg = Dict(:errors=>additionalProps, :message=>"Invalid data")
+      return json(errorMsg, status=400)
+    end
+
+    foundPersons = SearchLight.find(Person, SearchLight.SQLWhereExpression("id = $(payload(:id))", 0))
+      
+    if isempty(foundPersons)
+      return json(Dict(:message=>"Person not found"), status = 404)
     else
 
-      additionalProps = Dict()
-      for key in keys(payload)
-        if !(key in ["name", "work", "age", "address", "id"])
-          additionalProps[key] = payload[key]
-        end
-      end
-
-      errorMsg = Dict(:errors=>additionalProps, :message=>"Invalid data")
-      json(errorMsg, status=400)
+    if "name" in keys(payload)
+      foundPersons[1].name = payload["name"]
     end
+    if "work" in keys(payload)
+      foundPersons[1].work = payload["work"]
+    end
+    if "age" in keys(payload)
+      foundPersons[1].age = payload["age"]
+    end
+    if "address" in keys(payload)
+      foundPersons[1].address = payload["address"]
+    end
+
+    foundPersons[1] = save!(foundPersons[1])
+
+    #Dict(key=>if key != :id getfield(person, key) else getfield(getfield(person, key), :value) end for key ∈ fieldnames(Person)) 
+
+    updatedPerson = map(SearchLight.find(Person, SearchLight.SQLWhereExpression("id = $(payload(:id))", 0))) do person
+      Dict(key=>if key != :id getfield(person, key) else getfield(getfield(person, key), :value) end for key ∈ fieldnames(Person)) 
+    end
+    json(updatedPerson[1])
   end
 
   function delete()

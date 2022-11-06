@@ -23,12 +23,12 @@ jobs:
           heroku_email: matt.7d0@gmail.com
           usedocker: true
 
-      # TODO build, test and deploy project
+      # TODO test
 
-      - name: Sleep for 60s
+      - name: Sleep for 90s
         uses: juliangruber/sleep-action@v1
         with:
-          time: 60s
+          time: 90s
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
