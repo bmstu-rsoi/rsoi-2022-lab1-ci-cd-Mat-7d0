@@ -63,7 +63,7 @@ module PersonsController
       
     if isempty(foundPersons)
       return json(Dict(:message=>"Person not found"), status = 404)
-    else
+    end
 
     if "name" in keys(payload)
       foundPersons[1].name = payload["name"]
